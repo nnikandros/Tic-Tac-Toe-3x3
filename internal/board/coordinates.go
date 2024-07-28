@@ -1,6 +1,9 @@
 package board
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 type Coordinates struct {
 	X uint8
@@ -17,11 +20,19 @@ func (c Coordinates) Validate() error {
 
 func NewCoordinatesFromRequest(x, y int) (Coordinates, error) {
 
-	if x < 0 || x > Length {
-		return Coordinates{}, fmt.Errorf("out of bounds")
-	}
+	max := math.Max(float64(x), float64(y))
 
-	if y < 0 || y > Length {
+	min := math.Min(float64(x), float64(y))
+
+	// if x < 0 || x > Length {
+	// 	return Coordinates{}, fmt.Errorf("out of bounds")
+	// }
+
+	// if y < 0 || y > Length {
+	// 	return Coordinates{}, fmt.Errorf("out of bounds")
+	// }
+
+	if max < 0 || min > Length {
 		return Coordinates{}, fmt.Errorf("out of bounds")
 	}
 
