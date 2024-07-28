@@ -14,3 +14,17 @@ func (b Board) HasBeenset(p Coordinates) (int8, bool) {
 	return v, true
 
 }
+
+type Board2 [Length][Width]*int
+
+func (b Board2) Value(p Coordinates) (int, bool) {
+
+	v := b[p.X][p.Y]
+
+	if v == nil {
+		return 0, false
+	}
+
+	return *v, true
+
+}
