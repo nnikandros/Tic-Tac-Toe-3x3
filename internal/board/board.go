@@ -3,6 +3,9 @@ package board
 const Length = 3
 const Width = 3
 
+var PlayerXMark = 1
+var PlayerOMark = 0
+
 type Board [Length][Width]int8
 
 func (b Board) HasBeenset(p Coordinates) (int8, bool) {
@@ -26,5 +29,13 @@ func (b Board2) Value(p Coordinates) (int, bool) {
 	}
 
 	return *v, true
+
+}
+
+func (b *Board2) Set(p Coordinates) {
+	if value, ok := b.Value(p); ok {
+	}
+
+	
 
 }
