@@ -12,6 +12,8 @@ var PlayerOMark = 0
 
 type Board2 [Length][Width]*int
 
+// Method that checks if at a given Coordinate a value has been set or not
+// TODO: make b into a *Board2 for consistency
 func (b Board2) HasBeenSet(p Coordinates) (int, bool) {
 
 	v := b[p.X][p.Y]
@@ -24,6 +26,7 @@ func (b Board2) HasBeenSet(p Coordinates) (int, bool) {
 
 }
 
+// TODO parametrize the value that we puut
 func (b *Board2) Set(p Coordinates) error {
 	if value, ok := b.HasBeenSet(p); ok {
 		return fmt.Errorf("at Coordidanates %v, value has been set already with value %v", p, value)
