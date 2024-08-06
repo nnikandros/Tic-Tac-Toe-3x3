@@ -27,7 +27,7 @@ func TestBoard2(t *testing.T) {
 
 	fmt.Println(b)
 
-	v, ok := b.HasBeenset(board.Coordinates{0, 0})
+	v, ok := b.HasBeenSet(board.Coordinates{0, 0})
 
 	fmt.Println(v)
 
@@ -42,7 +42,7 @@ func TestBoard3(t *testing.T) {
 
 		b[0][0] = &board.PlayerXMark
 
-		gotValue, gotOk := b.HasBeenset(board.Coordinates{0, 0})
+		gotValue, gotOk := b.HasBeenSet(board.Coordinates{0, 0})
 		expectedOk := true
 		expectedValue := 1
 
@@ -60,7 +60,7 @@ func TestBoard3(t *testing.T) {
 
 		b[1][1] = &board.PlayerOMark
 
-		gotValue, gotOk := b.HasBeenset(board.Coordinates{1, 1})
+		gotValue, gotOk := b.HasBeenSet(board.Coordinates{1, 1})
 		expectedOk := true
 		expectedValue := 0
 
@@ -76,10 +76,35 @@ func TestBoard3(t *testing.T) {
 	t.Run("testing for Set value with nil pointer ", func(t *testing.T) {
 		b := board.Board2{}
 
-		_, gotOk := b.HasBeenset(board.Coordinates{1, 1})
+		_, gotOk := b.HasBeenSet(board.Coordinates{1, 1})
 
 		if gotOk != false {
 			t.Errorf("got %v but expteced false", gotOk)
+		}
+
+	})
+
+	t.Run("testing for Set method return nil", func(t *testing.T) {
+
+		b := board.Board2{}
+
+		err := b.Set(board.Coordinates{1, 1})
+
+		if err != nil {
+			t.Errorf("got %v but should be nil", err)
+		}
+
+	})
+	t.Run("testing for Set method return not nill", func(t *testing.T) {
+
+		b := board.Board2{}
+
+		b[1][1] = &board.PlayerOMark
+
+		err := b.Set(board.Coordinates{1, 1})
+
+		if err == nil {
+			t.Errorf("got %v but should be not nil", err)
 		}
 
 	})
