@@ -2,6 +2,7 @@ package board
 
 import (
 	"fmt"
+	"strings"
 )
 
 type Coordinates struct {
@@ -42,4 +43,16 @@ func NewCoordinatesFromRequest(x, y int) (Coordinates, error) {
 	// }
 
 	return Coordinates{X: uint8(x), Y: uint8(y)}, nil
+}
+
+func ValidatePlayer(p PlayerAndMove) error {
+	u := strings.ToLower(p.Player)
+
+	if strings.Compare(u, "x") != 0 && strings.Compare(u, "o") != 0 {
+		return fmt.Errorf("error")
+
+	}
+
+	return nil
+
 }
