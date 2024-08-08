@@ -9,6 +9,11 @@ type Coordinates struct {
 	Y uint8
 }
 
+type PlayerAndMove struct {
+	Move   Coordinates `json:"move"`
+	Player string      `json:"player"`
+}
+
 func (c Coordinates) Validate() error {
 	if c.X > Length || c.Y > Length {
 		return fmt.Errorf("outside of bounds")
