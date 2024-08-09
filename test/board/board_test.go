@@ -110,8 +110,16 @@ func TestBoard3(t *testing.T) {
 	})
 	t.Run("Testing for immutability", func(t *testing.T) {
 
-		// b := board.Board2{}
+		b := board.Board2{}
 
+		c := board.Coordinates{0, 0}
+		p := "x"
+
+		playerAndMove := board.PlayerAndMove{Move: c, Player: p}
+		newState, _ := b.RegisterMove(playerAndMove)
+
+		fmt.Printf("New Board state %v:", newState)
+		fmt.Printf("\n \n Previous Board state %v:", b)
 		// b2 := b
 
 		// b[1][1] = &board.PlayerOMark
@@ -126,18 +134,47 @@ func TestBoard3(t *testing.T) {
 
 	t.Run("Testing for mutation", func(t *testing.T) {
 
-		b := board.Board2{}
+		// b := board.Board2{}
 
-		b2 := &b
+		// b2 := &b
+
+		// // fmt.Println(b2)
+		// b[1][1] = &board.PlayerOMark
+
+		// b2[0][0] = &board.PlayerXMark
 
 		// fmt.Println(b2)
-		b[1][1] = &board.PlayerOMark
 
-		b2[0][0] = &board.PlayerXMark
+		// fmt.Println(b)
 
-		fmt.Println(b2)
+	})
+
+	t.Run("testing Register move with nil", func(t *testing.T) {
+		b := board.Board2{}
+
+		playerAndMove := board.PlayerAndMove{Move: board.Coordinates{0, 0}, Player: "x"}
+
+		_, err := b.RegisterMove(playerAndMove)
+
+		if err != nil {
+			t.Errorf("error should be nil here but got %v", err)
+		}
+
+	})
+	t.Run("testing Register move with non nil", func(t *testing.T) {
+		b := board.Board2{}
+
+		playerAndMove := board.PlayerAndMove{Move: board.Coordinates{1, 0}, Player: "x"}
+
+		b.Set(board.Coordinates{0, 0})
 
 		fmt.Println(b)
+
+		_, err := b.RegisterMove(playerAndMove)
+
+		if err != nil {
+			t.Errorf("error should be non nil here but got %v", err)
+		}
 
 	})
 
