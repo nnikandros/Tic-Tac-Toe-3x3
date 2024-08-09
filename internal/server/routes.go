@@ -3,13 +3,16 @@ package server
 import (
 	"encoding/json"
 	"net/http"
+
+	"github.com/go-chi/chi/v5"
 )
 
 func (s *Server) RegisterRoutes() http.Handler {
-	mux := http.NewServeMux()
+	// mux := mux.NewRouter()
+	r := chi.NewRouter()
 
-	mux.HandleFunc("/", s.HelloWorldHandler)
-	return mux
+	r.Get("/", s.HelloWorldHandler)
+	return r
 
 }
 
