@@ -2,6 +2,7 @@ package board
 
 import (
 	"fmt"
+	"strings"
 )
 
 type Coordinates struct {
@@ -9,10 +10,17 @@ type Coordinates struct {
 	Y uint8
 }
 
-type Coordinate2 struct {
-	X      uint8
-	Y      uint8
-	Player string
+type PlayerAndMove struct {
+	Move   Coordinates `json:"move"`
+	Player string      `json:"player"`
+}
+
+func (c Coordinates) Validate() error {
+	if c.X > Length || c.Y > Length {
+		return fmt.Errorf("outside of bounds")
+	}
+
+	return nil
 }
 
 func NewCoordinatesFromRequest(x, y int) (Coordinates, error) {
@@ -35,4 +43,16 @@ func NewCoordinatesFromRequest(x, y int) (Coordinates, error) {
 	// }
 
 	return Coordinates{X: uint8(x), Y: uint8(y)}, nil
+}
+
+func ValidatePlayer(p PlayerAndMove) error {
+	u := strings.ToLower(p.Player)
+
+	if strings.Compare(u, "x") != 0 && strings.Compare(u, "o") != 0 {
+		return fmt.Errorf("error")
+
+	}
+
+	return nil
+
 }

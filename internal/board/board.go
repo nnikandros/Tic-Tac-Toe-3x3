@@ -1,6 +1,9 @@
 package board
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 const (
 	Length = 3
@@ -35,5 +38,23 @@ func (b *Board2) Set(p Coordinates) error {
 	b[p.X][p.Y] = &PlayerXMark
 
 	return nil
+
+}
+
+func (b Board2) Set2(p PlayerAndMove) (Board2, error) {
+	b2 := b
+	if value, ok := b.HasBeenSet(p.Move); ok {
+		return Board2{}, fmt.Errorf("at Coordidanates %v, value has been set already with value %v", p, value)
+	}
+
+	playerSymbol := strings.ToLower(p.Player)
+	if strings.Compare(playerSymbol, "x") == 0 {
+		b2[p.Move.X][p.Move.Y] = &PlayerXMark
+	} else {
+		b2[p.Move.X][p.Move.Y] = &PlayerOMark
+
+	}
+
+	return b2, nil
 
 }
