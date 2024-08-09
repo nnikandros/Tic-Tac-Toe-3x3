@@ -29,7 +29,7 @@ func (b Board2) HasBeenSet(p Coordinates) (int, bool) {
 
 }
 
-// TODO parametrize the value that we puut
+// TODO parametrize the value that we puut. Mutates state. use for testing not for general use
 func (b *Board2) Set(p Coordinates) error {
 	if value, ok := b.HasBeenSet(p); ok {
 		return fmt.Errorf("at Coordidanates %v, value has been set already with value %v", p, value)
@@ -41,20 +41,19 @@ func (b *Board2) Set(p Coordinates) error {
 
 }
 
-func (b Board2) Set2(p PlayerAndMove) (Board2, error) {
-	b2 := b
+func (b Board2) RegisterMove(p PlayerAndMove) (Board2, error) {
 	if value, ok := b.HasBeenSet(p.Move); ok {
 		return Board2{}, fmt.Errorf("at Coordidanates %v, value has been set already with value %v", p, value)
 	}
 
 	playerSymbol := strings.ToLower(p.Player)
 	if strings.Compare(playerSymbol, "x") == 0 {
-		b2[p.Move.X][p.Move.Y] = &PlayerXMark
+		b[p.Move.X][p.Move.Y] = &PlayerXMark
 	} else {
-		b2[p.Move.X][p.Move.Y] = &PlayerOMark
+		b[p.Move.X][p.Move.Y] = &PlayerOMark
 
 	}
 
-	return b2, nil
+	return b, nil
 
 }
