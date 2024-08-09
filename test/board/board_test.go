@@ -108,5 +108,37 @@ func TestBoard3(t *testing.T) {
 		}
 
 	})
+	t.Run("Testing for immutability", func(t *testing.T) {
+
+		// b := board.Board2{}
+
+		// b2 := b
+
+		// b[1][1] = &board.PlayerOMark
+
+		// b2[0][0] = &board.PlayerXMark
+
+		// fmt.Println(b2)
+
+		// fmt.Println(b)
+
+	})
+
+	t.Run("Testing for mutation", func(t *testing.T) {
+
+		b := board.Board2{}
+
+		b2 := &b
+
+		// fmt.Println(b2)
+		b[1][1] = &board.PlayerOMark
+
+		b2[0][0] = &board.PlayerXMark
+
+		fmt.Println(b2)
+
+		fmt.Println(b)
+
+	})
 
 }

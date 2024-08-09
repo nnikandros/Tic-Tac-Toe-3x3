@@ -9,12 +9,10 @@ type Coordinates struct {
 	Y uint8
 }
 
-func (c Coordinates) Validate() error {
-	if c.X > Length || c.Y > Length {
-		return fmt.Errorf("outside of bounds")
-	}
-
-	return nil
+type Coordinate2 struct {
+	X      uint8
+	Y      uint8
+	Player string
 }
 
 func NewCoordinatesFromRequest(x, y int) (Coordinates, error) {
