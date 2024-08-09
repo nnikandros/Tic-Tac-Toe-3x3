@@ -15,6 +15,11 @@ type PlayerAndMove struct {
 	Player string      `json:"player"`
 }
 
+type PlayerAndMoveEmbedded struct {
+	Coordinates
+	Player string
+}
+
 func (c Coordinates) Validate() error {
 	if c.X > Length || c.Y > Length {
 		return fmt.Errorf("outside of bounds")
