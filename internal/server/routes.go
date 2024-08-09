@@ -12,4 +12,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 
 func (s *Server) HelloWorldHandler(w http.ResponseWriter, r *http.Request) {
 
+	msg := []byte("hello world")
+	w.Write(msg)
+
 }
