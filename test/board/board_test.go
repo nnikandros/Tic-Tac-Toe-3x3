@@ -23,7 +23,7 @@ func TestBoard(t *testing.T) {
 
 func TestBoard2(t *testing.T) {
 
-	b := board.Board2{}
+	b := board.Board{}
 
 	fmt.Println(b)
 
@@ -38,7 +38,7 @@ func TestBoard2(t *testing.T) {
 func TestBoard3(t *testing.T) {
 
 	t.Run("testing for Set value with PlayerXMark ", func(t *testing.T) {
-		b := board.Board2{}
+		b := board.Board{}
 
 		b[0][0] = &board.PlayerXMark
 
@@ -56,7 +56,7 @@ func TestBoard3(t *testing.T) {
 	})
 
 	t.Run("testing for Set value with PlayerOMark ", func(t *testing.T) {
-		b := board.Board2{}
+		b := board.Board{}
 
 		b[1][1] = &board.PlayerOMark
 
@@ -74,7 +74,7 @@ func TestBoard3(t *testing.T) {
 	})
 
 	t.Run("testing for Set value with nil pointer ", func(t *testing.T) {
-		b := board.Board2{}
+		b := board.Board{}
 
 		_, gotOk := b.HasBeenSet(board.Coordinates{1, 1})
 
@@ -86,7 +86,7 @@ func TestBoard3(t *testing.T) {
 
 	t.Run("testing for Set method return nil", func(t *testing.T) {
 
-		b := board.Board2{}
+		b := board.Board{}
 
 		err := b.Set(board.Coordinates{1, 1})
 
@@ -97,7 +97,7 @@ func TestBoard3(t *testing.T) {
 	})
 	t.Run("testing for Set method return not nill", func(t *testing.T) {
 
-		b := board.Board2{}
+		b := board.Board{}
 
 		b[1][1] = &board.PlayerOMark
 
@@ -110,7 +110,7 @@ func TestBoard3(t *testing.T) {
 	})
 	t.Run("Testing for immutability", func(t *testing.T) {
 
-		b := board.Board2{}
+		b := board.Board{}
 
 		c := board.Coordinates{0, 0}
 		p := "x"
@@ -150,7 +150,7 @@ func TestBoard3(t *testing.T) {
 	})
 
 	t.Run("testing Register move with nil", func(t *testing.T) {
-		b := board.Board2{}
+		b := board.Board{}
 
 		playerAndMove := board.PlayerAndMove{Move: board.Coordinates{0, 0}, Player: "x"}
 
@@ -162,7 +162,7 @@ func TestBoard3(t *testing.T) {
 
 	})
 	t.Run("testing Register move with non nil", func(t *testing.T) {
-		b := board.Board2{}
+		b := board.Board{}
 
 		playerAndMove := board.PlayerAndMove{Move: board.Coordinates{1, 0}, Player: "x"}
 
