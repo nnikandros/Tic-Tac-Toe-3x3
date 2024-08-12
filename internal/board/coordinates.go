@@ -6,8 +6,8 @@ import (
 )
 
 type Coordinates struct {
-	X uint8
-	Y uint8
+	X uint8 `json:"x"`
+	Y uint8 `json:"y"`
 }
 
 type PlayerAndMove struct {
