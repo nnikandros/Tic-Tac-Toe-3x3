@@ -40,7 +40,7 @@ func (s *Server) PostHandlerTest(w http.ResponseWriter, r *http.Request) {
 
 	// // msg := []byte("hello world")
 	// w.Write(jsonResp)
-	var t board.PlayerAndMove
+	var t board.PlayerAndMoveNoRestraint
 	Body, _ := io.ReadAll(r.Body)
 	// decoder := json.NewDecoder(r.Body)
 	defer r.Body.Close()
@@ -49,6 +49,12 @@ func (s *Server) PostHandlerTest(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		fmt.Printf("error happend with %v", err)
+	}
+
+	NewPlayAndMove, err := t.Validate()
+
+	if err != nil {
+		fmt.Printf("error happend with %+v", err)
 	}
 
 	fmt.Println(string(Body))
