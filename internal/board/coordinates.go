@@ -10,22 +10,41 @@ type Coordinates struct {
 	Y uint8 `json:"y"`
 }
 
+type CoordinatesNoRestraint struct {
+	X int `json:"x"`
+	Y int `json:"y"`
+}
+
+type PlayerAndMoveNoRestraint struct {
+	Move   CoordinatesNoRestraint `json:"move"`
+	Player string                 `json:"player"`
+}
+
 type PlayerAndMove struct {
 	Move   Coordinates `json:"move"`
 	Player string      `json:"player"`
 }
 
-type PlayerAndMoveEmbedded struct {
-	Coordinates
-	Player string
-}
+func (c PlayerAndMoveNoRestraint) Validate() (PlayerAndMove, error) {
+	x := c.Move.X
+	y := c.Move.Y
+	u := strings.ToLower(c.Player)
 
-func (c Coordinates) Validate() error {
-	if c.X > Length || c.Y > Length {
-		return fmt.Errorf("outside of bounds")
+	if x < 0 || x > Length {
+		return PlayerAndMove{}, fmt.Errorf("out of bounds")
 	}
 
-	return nil
+	if y < 0 || y > Length {
+		return PlayerAndMove{}, fmt.Errorf("out of bounds")
+	}
+
+	if strings.Compare(u, "x") != 0 && strings.Compare(u, "o") != 0 {
+		return PlayerAndMove{}, fmt.Errorf("error")
+
+	}
+
+	return PlayerAndMove{Move: Coordinates{uint8(x), uint8(y)}, Player: u}, nil
+
 }
 
 func NewCoordinatesFromRequest(x, y int) (Coordinates, error) {
