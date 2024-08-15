@@ -61,3 +61,10 @@ func (s *Server) PostHandlerTest(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("the body of the post request was %+v\n", t)
 
 }
+
+// type appHandler func(http.ResponseWriter, *http.Request) error
+// func (fn appHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+//     if err := fn(w, r); err != nil {
+//         http.Error(w, err.Error(), 500)
+//     }
+// }
