@@ -32,14 +32,12 @@ func (s *Server) HelloWorldHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 func (s *Server) PostHandlerTest(w http.ResponseWriter, r *http.Request) {
+	NewPlayAndMove, err := NewPlayAndMove(r)
 
-	// resp := make(map[string]string)
-	// resp["message"] = "hello world"
+}
 
-	// jsonResp, _ := json.Marshal(resp)
-
-	// // msg := []byte("hello world")
-	// w.Write(jsonResp)
+func NewPlayAndMove(r *http.Request) (board.PlayerAndMove, error) {
+	d := board.PlayerAndMove{}
 	var t board.PlayerAndMoveNoRestraint
 	Body, _ := io.ReadAll(r.Body)
 	// decoder := json.NewDecoder(r.Body)
@@ -48,17 +46,19 @@ func (s *Server) PostHandlerTest(w http.ResponseWriter, r *http.Request) {
 	err := json.Unmarshal(Body, &t)
 
 	if err != nil {
-		fmt.Printf("error happend with %v", err)
+		return d, fmt.Errorf("error happend with %v", err)
 	}
 
 	NewPlayAndMove, err := t.Validate()
 
 	if err != nil {
-		fmt.Printf("error happend with %+v", err)
+		return d, fmt.Errorf("error happend with %+v", err)
 	}
 
 	fmt.Println(string(Body))
 	fmt.Printf("the body of the post request was %+v\n", t)
+
+	return NewPlayAndMove, nil
 
 }
 
@@ -68,3 +68,30 @@ func (s *Server) PostHandlerTest(w http.ResponseWriter, r *http.Request) {
 //         http.Error(w, err.Error(), 500)
 //     }
 // }
+
+// resp := make(map[string]string)
+// resp["message"] = "hello world"
+
+// jsonResp, _ := json.Marshal(resp)
+
+// // msg := []byte("hello world")
+// w.Write(jsonResp)
+// var t board.PlayerAndMoveNoRestraint
+// Body, _ := io.ReadAll(r.Body)
+// // decoder := json.NewDecoder(r.Body)
+// defer r.Body.Close()
+// // err := decoder.Decode(&t)
+// err := json.Unmarshal(Body, &t)
+
+// if err != nil {
+// 	fmt.Printf("error happend with %v", err)
+// }
+
+// NewPlayAndMove, err := t.Validate()
+
+// if err != nil {
+// 	fmt.Printf("error happend with %+v", err)
+// }
+
+// fmt.Println(string(Body))
+// fmt.Printf("the body of the post request was %+v\n", t)
