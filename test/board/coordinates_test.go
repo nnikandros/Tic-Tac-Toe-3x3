@@ -1,6 +1,7 @@
 package test
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 	"tic-tac-toe/internal/board"
@@ -70,6 +71,15 @@ func TestNewCoordidantesFromReques(t *testing.T) {
 		if err == nil {
 			t.Errorf("error should be non nil ")
 		}
+
+	})
+	t.Run("wrong things 2", func(t *testing.T) {
+
+		type HistoryOfBoard []board.Board
+
+		var h HistoryOfBoard
+
+		fmt.Println(h)
 
 	})
 

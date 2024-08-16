@@ -20,6 +20,17 @@ func (s *Server) RegisterRoutes() http.Handler {
 
 }
 
+func (s *Server) NewGame(w http.ResponseWriter, r *http.Request) {
+	resp := make(map[string]string)
+	resp["new_game"] = "created"
+
+	// w.Header().Set("Content-Type", "application/json")
+	// w.WriteHeader(http.StatusCreated)
+
+	// json.NewEncoder(w).Encode(resp)
+
+}
+
 func (s *Server) HelloWorldHandler(w http.ResponseWriter, r *http.Request) {
 
 	resp := make(map[string]string)
