@@ -75,11 +75,15 @@ func TestNewCoordidantesFromReques(t *testing.T) {
 	})
 	t.Run("wrong things 2", func(t *testing.T) {
 
-		type HistoryOfBoard []board.Board
+		type Board2 [9]*int
 
-		var h HistoryOfBoard
+		var v Board2
 
-		fmt.Println(h)
+		fmt.Println(v)
+
+		i := "X1"
+
+		fmt.Println(string(i[0]))
 
 	})
 
