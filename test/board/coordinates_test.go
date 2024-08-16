@@ -83,7 +83,7 @@ func TestNewCoordidantesFromReques(t *testing.T) {
 
 		i := "X1"
 
-		fmt.Println(string(i[0]))
+		fmt.Println(string(i[1]))
 
 	})
 
