@@ -30,16 +30,18 @@ func (c PlayerAndMoveNoRestraint) Validate() (PlayerAndMove, error) {
 	y := c.Move.Y
 	u := strings.ToLower(c.Player)
 
+	var p PlayerAndMove
+
 	if x < 0 || x > Length {
-		return PlayerAndMove{}, fmt.Errorf("out of bounds")
+		return p, fmt.Errorf("the x-axis is out of bounds %d", x)
 	}
 
 	if y < 0 || y > Length {
-		return PlayerAndMove{}, fmt.Errorf("out of bounds")
+		return p, fmt.Errorf("the x-axis is out of bounds %d", y)
 	}
 
 	if strings.Compare(u, "x") != 0 && strings.Compare(u, "o") != 0 {
-		return PlayerAndMove{}, fmt.Errorf("error")
+		return p, fmt.Errorf("player sign must be x and o, value that was given was %s", u)
 
 	}
 
@@ -49,12 +51,14 @@ func (c PlayerAndMoveNoRestraint) Validate() (PlayerAndMove, error) {
 
 func NewCoordinatesFromRequest(x, y int) (Coordinates, error) {
 
+	var c Coordinates
+
 	if x < 0 || x > Length {
-		return Coordinates{}, fmt.Errorf("out of bounds")
+		return c, fmt.Errorf("out of bounds")
 	}
 
 	if y < 0 || y > Length {
-		return Coordinates{}, fmt.Errorf("out of bounds")
+		return c, fmt.Errorf("out of bounds")
 	}
 
 	return Coordinates{X: uint8(x), Y: uint8(y)}, nil
