@@ -73,18 +73,55 @@ func TestNewCoordidantesFromReques(t *testing.T) {
 		}
 
 	})
-	t.Run("wrong things 2", func(t *testing.T) {
+	// t.Run("saving board state to gob", func(t *testing.T) {
+	// 	var buffer bytes.Buffer
+	// 	encoder := gob.NewEncoder(&buffer)
+	// 	b := board.Board{}
 
-		type Board2 [9]*int
+	// 	err := encoder.Encode(b)
+	// 	if err != nil {
+	// 		fmt.Println("Error encoding:", err)
+	// 	}
 
-		var v Board2
+	// 	file, err := os.Create("person.gob")
 
-		fmt.Println(v)
+	// 	if err != nil {
+	// 		fmt.Println("Error creating file:", err)
+	// 	}
+	// 	defer file.Close()
 
-		i := "X1"
+	// 	_, err = buffer.WriteTo(file)
+	// 	if err != nil {
+	// 		fmt.Println("Error writing to file:", err)
+	// 	}
 
-		fmt.Println(string(i[1]))
+	// 	fmt.Println(uuid.NewString())
 
+	// })
+	t.Run("saving board state to gob", func(t *testing.T) {
+
+		var b board.Board
+
+		c := board.Coordinates{X: 0, Y: 0}
+
+		p := board.PlayerAndMove{Move: c, Player: "X"}
+
+		newBoard, _ := b.RegisterMove(p)
+		var h []board.Board
+
+		h = append(h, newBoard)
+
+		fmt.Printf("%v\n\n", h)
+
+		c1 := board.Coordinates{X: 1, Y: 0}
+
+		p1 := board.PlayerAndMove{Move: c1, Player: "O"}
+
+		newBoard2, _ := newBoard.RegisterMove(p1)
+
+		h = append(h, newBoard2)
+
+		fmt.Printf("%+v", h)
 	})
 
 }
