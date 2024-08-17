@@ -22,6 +22,19 @@ func (s *Server) RegisterRoutes() http.Handler {
 	r.Get("/", s.HelloWorldHandler)
 	r.Get("/newgame", s.NewGame)
 	r.Post("/posthandler", s.PostHandlerTest)
+
+	r.Route("/game", func(r chi.Router) {
+
+		r.Route("/{gameID}", func(r chi.Router) {
+
+			r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+				msg := []byte("helloo")
+				w.Write(msg)
+			})
+
+		})
+	})
+
 	return r
 
 }
@@ -31,7 +44,7 @@ func (s *Server) NewGame(w http.ResponseWriter, r *http.Request) {
 	resp["new_game"] = "created"
 
 	gameId := uuid.NewString()
-	resp["Id"] = gameId
+	resp["ID"] = gameId
 
 	var buffer bytes.Buffer
 	var h []board.Board
@@ -74,7 +87,19 @@ func (s *Server) HelloWorldHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 func (s *Server) PostHandlerTest(w http.ResponseWriter, r *http.Request) {
-	NewPlayAndMove, err := NewPlayAndMove(r)
+	err := r.ParseForm()
+	if err != nil {
+		fmt.Println("error happend at parsing form %w", err)
+	}
+	values := r.Form
+
+	// bodyValues := r.PostForm
+	fmt.Println(r.URL)
+
+	fmt.Printf("values are %v", values)
+	fmt.Printf("THe first value in the maps is %+v and with type %T", values["game"], values["game"])
+
+	// _, _ := NewPlayAndMove(r)
 
 }
 
