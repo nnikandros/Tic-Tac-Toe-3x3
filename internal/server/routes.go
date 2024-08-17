@@ -104,7 +104,7 @@ func (s *Server) PostHandlerTest(w http.ResponseWriter, r *http.Request) {
 }
 
 func NewPlayAndMove(r *http.Request) (board.PlayerAndMove, error) {
-	d := board.PlayerAndMove{}
+	var d board.PlayerAndMove
 	var t board.PlayerAndMoveNoRestraint
 	Body, _ := io.ReadAll(r.Body)
 	// decoder := json.NewDecoder(r.Body)
