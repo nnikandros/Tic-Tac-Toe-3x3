@@ -1,9 +1,8 @@
-package test
+package board
 
 import (
 	"fmt"
 	"testing"
-	"tic-tac-toe/internal/board"
 )
 
 func TestBoard(t *testing.T) {
@@ -23,11 +22,11 @@ func TestBoard(t *testing.T) {
 
 func TestBoard2(t *testing.T) {
 
-	b := board.Board{}
+	b := Board{}
 
 	fmt.Println(b)
 
-	v, ok := b.HasBeenSet(board.Coordinates{0, 0})
+	v, ok := b.HasBeenSet(Coordinates{0, 0})
 
 	fmt.Println(v)
 
@@ -38,11 +37,11 @@ func TestBoard2(t *testing.T) {
 func TestBoard3(t *testing.T) {
 
 	t.Run("testing for Set value with PlayerXMark ", func(t *testing.T) {
-		b := board.Board{}
+		b := Board{}
 
-		b[0][0] = &board.PlayerXMark
+		b[0][0] = &PlayerXMark
 
-		gotValue, gotOk := b.HasBeenSet(board.Coordinates{0, 0})
+		gotValue, gotOk := b.HasBeenSet(Coordinates{0, 0})
 		expectedOk := true
 		expectedValue := 1
 
@@ -56,11 +55,11 @@ func TestBoard3(t *testing.T) {
 	})
 
 	t.Run("testing for Set value with PlayerOMark ", func(t *testing.T) {
-		b := board.Board{}
+		b := Board{}
 
-		b[1][1] = &board.PlayerOMark
+		b[1][1] = &PlayerOMark
 
-		gotValue, gotOk := b.HasBeenSet(board.Coordinates{1, 1})
+		gotValue, gotOk := b.HasBeenSet(Coordinates{1, 1})
 		expectedOk := true
 		expectedValue := 0
 
@@ -74,9 +73,9 @@ func TestBoard3(t *testing.T) {
 	})
 
 	t.Run("testing for Set value with nil pointer ", func(t *testing.T) {
-		b := board.Board{}
+		b := Board{}
 
-		_, gotOk := b.HasBeenSet(board.Coordinates{1, 1})
+		_, gotOk := b.HasBeenSet(Coordinates{1, 1})
 
 		if gotOk != false {
 			t.Errorf("got %v but expteced false", gotOk)
@@ -86,9 +85,9 @@ func TestBoard3(t *testing.T) {
 
 	t.Run("testing for Set method return nil", func(t *testing.T) {
 
-		b := board.Board{}
+		b := Board{}
 
-		err := b.Set(board.Coordinates{1, 1})
+		err := b.Set(Coordinates{1, 1})
 
 		if err != nil {
 			t.Errorf("got %v but should be nil", err)
@@ -97,11 +96,11 @@ func TestBoard3(t *testing.T) {
 	})
 	t.Run("testing for Set method return not nill", func(t *testing.T) {
 
-		b := board.Board{}
+		b := Board{}
 
-		b[1][1] = &board.PlayerOMark
+		b[1][1] = &PlayerOMark
 
-		err := b.Set(board.Coordinates{1, 1})
+		err := b.Set(Coordinates{1, 1})
 
 		if err == nil {
 			t.Errorf("got %v but should be not nil", err)
@@ -110,12 +109,12 @@ func TestBoard3(t *testing.T) {
 	})
 	t.Run("Testing for immutability", func(t *testing.T) {
 
-		b := board.Board{}
+		b := Board{}
 
-		c := board.Coordinates{0, 0}
+		c := Coordinates{0, 0}
 		p := "x"
 
-		playerAndMove := board.PlayerAndMove{Move: c, Player: p}
+		playerAndMove := PlayerAndMove{Move: c, Player: p}
 		newState, _ := b.RegisterMove(playerAndMove)
 
 		fmt.Printf("New Board state %v:", newState)
@@ -150,9 +149,9 @@ func TestBoard3(t *testing.T) {
 	})
 
 	t.Run("testing Register move with nil", func(t *testing.T) {
-		b := board.Board{}
+		b := Board{}
 
-		playerAndMove := board.PlayerAndMove{Move: board.Coordinates{0, 0}, Player: "x"}
+		playerAndMove := PlayerAndMove{Move: Coordinates{0, 0}, Player: "x"}
 
 		_, err := b.RegisterMove(playerAndMove)
 
@@ -162,11 +161,11 @@ func TestBoard3(t *testing.T) {
 
 	})
 	t.Run("testing Register move with non nil", func(t *testing.T) {
-		b := board.Board{}
+		b := Board{}
 
-		playerAndMove := board.PlayerAndMove{Move: board.Coordinates{1, 0}, Player: "x"}
+		playerAndMove := PlayerAndMove{Move: Coordinates{1, 0}, Player: "x"}
 
-		b.Set(board.Coordinates{0, 0})
+		b.Set(Coordinates{0, 0})
 
 		fmt.Println(b)
 

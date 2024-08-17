@@ -1,10 +1,9 @@
-package test
+package board
 
 import (
 	"fmt"
 	"reflect"
 	"testing"
-	"tic-tac-toe/internal/board"
 )
 
 func TestNewCoordidantesFromReques(t *testing.T) {
@@ -14,9 +13,9 @@ func TestNewCoordidantesFromReques(t *testing.T) {
 		x := 0
 		y := 1
 
-		got, _ := board.NewCoordinatesFromRequest(x, y)
+		got, _ := NewCoordinatesFromRequest(x, y)
 
-		expected := board.Coordinates{0, 1}
+		expected := Coordinates{0, 1}
 
 		if !reflect.DeepEqual(got, expected) {
 			t.Errorf("got  %v but expected %v", got, expected)
@@ -28,9 +27,9 @@ func TestNewCoordidantesFromReques(t *testing.T) {
 		x := 2
 		y := 1
 
-		got, _ := board.NewCoordinatesFromRequest(x, y)
+		got, _ := NewCoordinatesFromRequest(x, y)
 
-		expected := board.Coordinates{2, 1}
+		expected := Coordinates{2, 1}
 
 		if !reflect.DeepEqual(got, expected) {
 			t.Errorf("got  %v but expected %v", got, expected)
@@ -43,9 +42,9 @@ func TestNewCoordidantesFromReques(t *testing.T) {
 		x := -2
 		y := 1
 
-		got, err := board.NewCoordinatesFromRequest(x, y)
+		got, err := NewCoordinatesFromRequest(x, y)
 
-		expected := board.Coordinates{}
+		expected := Coordinates{}
 
 		if !reflect.DeepEqual(got, expected) {
 		}
@@ -61,9 +60,9 @@ func TestNewCoordidantesFromReques(t *testing.T) {
 		x := 5
 		y := 0
 
-		got, err := board.NewCoordinatesFromRequest(x, y)
+		got, err := NewCoordinatesFromRequest(x, y)
 
-		expected := board.Coordinates{}
+		expected := Coordinates{}
 
 		if !reflect.DeepEqual(got, expected) {
 		}
@@ -100,22 +99,22 @@ func TestNewCoordidantesFromReques(t *testing.T) {
 	// })
 	t.Run("saving board state to gob", func(t *testing.T) {
 
-		var b board.Board
+		var b Board
 
-		c := board.Coordinates{X: 0, Y: 0}
+		c := Coordinates{X: 0, Y: 0}
 
-		p := board.PlayerAndMove{Move: c, Player: "X"}
+		p := PlayerAndMove{Move: c, Player: "X"}
 
 		newBoard, _ := b.RegisterMove(p)
-		var h []board.Board
+		var h []Board
 
 		h = append(h, newBoard)
 
 		fmt.Printf("%v\n\n", h)
 
-		c1 := board.Coordinates{X: 1, Y: 0}
+		c1 := Coordinates{X: 1, Y: 0}
 
-		p1 := board.PlayerAndMove{Move: c1, Player: "O"}
+		p1 := PlayerAndMove{Move: c1, Player: "O"}
 
 		newBoard2, _ := newBoard.RegisterMove(p1)
 
