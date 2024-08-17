@@ -23,6 +23,13 @@ func PathToGames() string {
 
 }
 
+func CreateDirs() {
+	var GAMES_DIR = filepath.Join(APP_DIR, "games")
+
+	var _ = os.Mkdir(GAMES_DIR, 0755)
+
+}
+
 var p, _ = os.Getwd()
 
 var APP_DIR = filepath.Dir(filepath.Dir(filepath.Dir(p)))
