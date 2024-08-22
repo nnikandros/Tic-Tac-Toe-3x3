@@ -23,10 +23,17 @@ func PathToGames() string {
 
 }
 
-func CreateDirs() {
+// Create the directories necessary for storing. Currently we only save the games so we need app/games dir
+func CreateDirs() error {
 	var GAMES_DIR = filepath.Join(APP_DIR, "games")
 
-	var _ = os.Mkdir(GAMES_DIR, 0755)
+	err := os.Mkdir(GAMES_DIR, 0755)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 
 }
 

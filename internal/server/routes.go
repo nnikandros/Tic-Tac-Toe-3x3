@@ -51,7 +51,7 @@ func (s *Server) NewGame(w http.ResponseWriter, r *http.Request) {
 	encoder := gob.NewEncoder(&buffer)
 	err := encoder.Encode(h)
 	if err != nil {
-		//   do something here
+		fmt.Printf("error at encoding the history %v", err)
 	}
 
 	nameOfFile := strings.Join([]string{gameId, "gob"}, ".")
@@ -91,13 +91,17 @@ func (s *Server) PostHandlerTest(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println("error happend at parsing form %w", err)
 	}
+	fmt.Printf("&&&&&&&&&&&&&&&&new request&&&&&&&&&&&&&&&&&&\n")
 	values := r.Form
 
 	// bodyValues := r.PostForm
-	fmt.Println(r.URL)
+	fmt.Printf("URl string from request is %v\n", *r.URL)
 
-	fmt.Printf("values are %v", values)
-	fmt.Printf("THe first value in the maps is %+v and with type %T", values["game"], values["game"])
+	fmt.Println(r.URL.Query())
+
+	fmt.Printf("values are %v\n", values)
+	fmt.Printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+	fmt.Printf("THe first value in the maps is %+v and with type %T\n", values["game"], values["game"])
 
 	// _, _ := NewPlayAndMove(r)
 
